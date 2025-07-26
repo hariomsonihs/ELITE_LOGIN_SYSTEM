@@ -53,7 +53,7 @@ export default function StudentProfile({ user }) {
             </div>
           </div>
 
-  <div style={styles.feeCard}>
+          <div style={styles.feeCard}>
             <div style={styles.feeItem}>
               <FiDollarSign style={styles.icon} />
               <div>
@@ -61,8 +61,7 @@ export default function StudentProfile({ user }) {
                 <p style={styles.detailValue}>₹{user.batch || 0}</p>
               </div>
             </div>
-  
-          <div style={styles.feeCard}>
+            
             <div style={styles.feeItem}>
               <FiDollarSign style={styles.icon} />
               <div>
@@ -70,7 +69,9 @@ export default function StudentProfile({ user }) {
                 <p style={styles.detailValue}>₹{user.totalFee || 0}</p>
               </div>
             </div>
-            
+          </div>
+
+          <div style={styles.feeCard}>
             <div style={styles.feeItem}>
               <FiAlertCircle style={{ ...styles.icon, color: user.pendingFee > 0 ? '#e74c3c' : '#27ae60' }} />
               <div>
