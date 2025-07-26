@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiUser, FiMail, FiPhone, FiBook, FiClock, FiDollarSign, FiAlertCircle, FiAward } from 'react-icons/fi';
+import { FiUser, FiMail, FiPhone, FiBook, FiClock, FiDollarSign, FiAlertCircle, FiAward, FiUsers, FiCalender } from 'react-icons/fi';
 
 export default function StudentProfile({ user }) {
   return (
@@ -55,10 +55,18 @@ export default function StudentProfile({ user }) {
 
           <div style={styles.feeCard}>
             <div style={styles.feeItem}>
-              <FiDollarSign style={styles.icon} />
+              <FiUsers style={styles.icon} />
               <div>
                 <p style={styles.detailLabel}>Batch</p>
-                <p style={styles.detailValue}>₹{user.batch || 0}</p>
+                <p style={styles.detailValue}>{user.batch || N/A}</p>
+              </div>
+            </div>
+    <div style={styles.feeCard}>
+            <div style={styles.feeItem}>
+              <FiCalender style={styles.icon} />
+              <div>
+                <p style={styles.detailLabel}>Year</p>
+                <p style={styles.detailValue}>{user.year || N/A}</p>
               </div>
             </div>
             
