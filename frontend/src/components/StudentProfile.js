@@ -52,7 +52,14 @@ export default function StudentProfile({ user }) {
               </div>
             </div>
           </div>
-          
+          <div style={styles.detailCard}>
+            <div style={styles.detailItem}>
+              <Batch style={styles.icon} />
+              <div>
+                <p style={styles.detailLabel}>Batch</p>
+                <p style={styles.detailValue}>{user.batch || 'N/A'}</p>
+              </div>
+            </div>
           <div style={styles.feeCard}>
             <div style={styles.feeItem}>
               <FiDollarSign style={styles.icon} />
