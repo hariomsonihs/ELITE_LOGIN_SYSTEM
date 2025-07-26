@@ -12,7 +12,7 @@ export default function LoginForm({ onLogin }) {
     setIsLoading(true);
     
     try {
-      const res = await api.post('https://elite-login-system.onrender.com/api/auth/login', {
+      const res = await api.post('https://ecc-backend-i44g.onrender.com/api/auth/login', {
         emailOrMobile,
         password
       });
