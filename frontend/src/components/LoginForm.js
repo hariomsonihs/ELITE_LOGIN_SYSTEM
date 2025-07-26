@@ -67,10 +67,14 @@ export default function LoginForm({ onLogin }) {
         {/* Header */}
         <div style={styles.header}>
           <div style={styles.logo}>
-            <div style={styles.logoIcon}>ECC</div>
+            <img 
+  src="https://elitecomputerclasses.com/logo.jpg" 
+  alt="ELITE COMPUTER CLASSES Logo" 
+  style={styles.logoImage}
+/>
           </div>
           <h1 style={styles.institutionName}>ELITE COMPUTER CLASSES</h1>
-          <h2 style={styles.dashboardTitle}>ADMIN PORTAL</h2>
+          <h2 style={styles.dashboardTitle}>LOGIN PORTAL</h2>
         </div>
         
         {/* Login Form */}
@@ -164,7 +168,7 @@ export default function LoginForm({ onLogin }) {
       {/* Footer */}
       <div style={styles.footer}>
         <a 
-          href="mailto:codevora.tech@gmail.com" 
+          href="mailto:codevoraofficial@gmail.com" 
           style={styles.footerLink}
           target="_blank" 
           rel="noopener noreferrer"
@@ -258,6 +262,15 @@ const styles = {
     justifyContent: 'center',
     border: '2px solid rgba(255,255,255,0.2)',
   },
+  logoImage: {
+    width: '80px',
+    height: '80px',
+    objectFit: 'contain',
+    borderRadius: '50%',
+    border: '2px solid rgba(255,255,255,0.2)',
+    padding: '5px',
+    backgroundColor: 'rgba(255,255,255,0.1)'
+  }
   logoIcon: {
     fontSize: '2rem',
     fontWeight: 'bold',
