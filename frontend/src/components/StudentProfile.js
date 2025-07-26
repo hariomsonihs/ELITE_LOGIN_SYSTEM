@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiUser, FiMail, FiPhone, FiBook, FiClock, FiDollarSign, FiAlertCircle, FiAward, FiUsers, FiCalender } from 'react-icons/fi';
+import { FiMail, FiPhone, FiBook, FiClock, FiDollarSign, FiAlertCircle, FiAward, FiUsers, FiCalendar } from 'react-icons/fi';
 
 export default function StudentProfile({ user }) {
   return (
@@ -58,18 +58,20 @@ export default function StudentProfile({ user }) {
               <FiUsers style={styles.icon} />
               <div>
                 <p style={styles.detailLabel}>Batch</p>
-                <p style={styles.detailValue}>{user.batch || N/A}</p>
-              </div>
-            </div>
-    <div style={styles.feeCard}>
-            <div style={styles.feeItem}>
-              <FiCalender style={styles.icon} />
-              <div>
-                <p style={styles.detailLabel}>Year</p>
-                <p style={styles.detailValue}>{user.year || N/A}</p>
+                <p style={styles.detailValue}>{user.batch || 'N/A'}</p>
               </div>
             </div>
             
+            <div style={styles.feeItem}>
+              <FiCalendar style={styles.icon} />
+              <div>
+                <p style={styles.detailLabel}>Year</p>
+                <p style={styles.detailValue}>{user.year || 'N/A'}</p>
+              </div>
+            </div>
+          </div>
+
+          <div style={styles.feeCard}>
             <div style={styles.feeItem}>
               <FiDollarSign style={styles.icon} />
               <div>
@@ -77,9 +79,7 @@ export default function StudentProfile({ user }) {
                 <p style={styles.detailValue}>₹{user.totalFee || 0}</p>
               </div>
             </div>
-          </div>
-
-          <div style={styles.feeCard}>
+            
             <div style={styles.feeItem}>
               <FiAlertCircle style={{ ...styles.icon, color: user.pendingFee > 0 ? '#e74c3c' : '#27ae60' }} />
               <div>
@@ -108,7 +108,8 @@ const styles = {
     minHeight: '100vh',
     backgroundColor: '#f5f7fa',
     padding: '20px',
-    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    boxSizing: 'border-box'
   },
   header: {
     textAlign: 'center',
@@ -118,17 +119,18 @@ const styles = {
   },
   institutionName: {
     color: '#2c3e50',
-    fontSize: '2rem',
+    fontSize: 'clamp(1.5rem, 4vw, 2rem)', // Responsive font size
     fontWeight: '700',
     marginBottom: '10px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: '10px'
+    gap: '10px',
+    flexWrap: 'wrap'
   },
   profileTitle: {
     color: '#3498db',
-    fontSize: '1.5rem',
+    fontSize: 'clamp(1.2rem, 3vw, 1.5rem)',
     fontWeight: '600',
     margin: '0'
   },
@@ -144,17 +146,17 @@ const styles = {
   profileHeader: {
     backgroundColor: '#3498db',
     color: 'white',
-    padding: '30px',
+    padding: 'clamp(20px, 4vw, 30px)',
     textAlign: 'center',
     position: 'relative'
   },
   avatar: {
-    width: '80px',
-    height: '80px',
+    width: 'clamp(60px, 10vw, 80px)',
+    height: 'clamp(60px, 10vw, 80px)',
     borderRadius: '50%',
     backgroundColor: '#2980b9',
     color: 'white',
-    fontSize: '2.5rem',
+    fontSize: 'clamp(1.8rem, 5vw, 2.5rem)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -162,65 +164,63 @@ const styles = {
     fontWeight: '600'
   },
   studentName: {
-    fontSize: '1.8rem',
+    fontSize: 'clamp(1.3rem, 4vw, 1.8rem)',
     margin: '0 0 5px',
     fontWeight: '600'
   },
   regNo: {
-    fontSize: '1rem',
+    fontSize: 'clamp(0.8rem, 2.5vw, 1rem)',
     opacity: '0.9',
     margin: '0'
   },
   profileDetails: {
-    padding: '25px',
+    padding: 'clamp(15px, 3vw, 25px)',
     display: 'grid',
-    gap: '20px'
+    gap: 'clamp(15px, 3vw, 20px)'
   },
   detailCard: {
     backgroundColor: '#f8f9fa',
     borderRadius: '10px',
-    padding: '20px',
+    padding: 'clamp(15px, 3vw, 20px)',
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-    gap: '20px'
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+    gap: 'clamp(15px, 3vw, 20px)'
   },
   feeCard: {
     backgroundColor: '#f8f9fa',
     borderRadius: '10px',
-    padding: '20px',
+    padding: 'clamp(15px, 3vw, 20px)',
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-    gap: '20px'
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+    gap: 'clamp(15px, 3vw, 20px)'
   },
   detailItem: {
     display: 'flex',
-    gap: '15px',
-    alignItems: 'center'
+    gap: 'clamp(10px, 2vw, 15px)',
+    alignItems: 'center',
+    minWidth: '150px'
   },
   feeItem: {
     display: 'flex',
-    gap: '15px',
-    alignItems: 'center'
+    gap: 'clamp(10px, 2vw, 15px)',
+    alignItems: 'center',
+    minWidth: '150px'
   },
   icon: {
-    fontSize: '1.5rem',
+    fontSize: 'clamp(1.2rem, 3vw, 1.5rem)',
     color: '#3498db',
     minWidth: '30px'
   },
   detailLabel: {
-    fontSize: '0.9rem',
+    fontSize: 'clamp(0.8rem, 2vw, 0.9rem)',
     color: '#7f8c8d',
     margin: '0 0 5px'
   },
   detailValue: {
-    fontSize: '1.1rem',
+    fontSize: 'clamp(1rem, 2.5vw, 1.1rem)',
     fontWeight: '500',
     margin: '0',
     color: '#2c3e50'
-  },
-  '@keyframes fadeIn': {
-    from: { opacity: 0, transform: 'translateY(20px)' },
-    to: { opacity: 1, transform: 'translateY(0)' }
   }
 };
 
@@ -231,6 +231,12 @@ document.head.insertAdjacentHTML(
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
     }
   </style>`
 );
