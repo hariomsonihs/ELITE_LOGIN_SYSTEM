@@ -270,7 +270,7 @@ const styles = {
     border: '2px solid rgba(255,255,255,0.2)',
     padding: '5px',
     backgroundColor: 'rgba(255,255,255,0.1)'
-  }
+  },
   logoIcon: {
     fontSize: '2rem',
     fontWeight: 'bold',
