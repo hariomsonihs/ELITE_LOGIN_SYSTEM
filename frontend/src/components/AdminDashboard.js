@@ -3,7 +3,7 @@ import api from '../api';
 import { 
   FiUser, FiUserPlus, FiEdit2, FiTrash2, FiBook, FiBookOpen, 
   FiDollarSign, FiClock, FiMail, FiPhone, FiUsers, FiAward,
-  FiPlusCircle, FiX, FiSave, FiCheckCircle, FiAlertCircle
+  FiPlusCircle, FiX, FiSave, FiCheckCircle, FiAlertCircle, FiCalendar
 } from 'react-icons/fi';
 import { FaChalkboardTeacher, FaUserGraduate, FaUserShield } from 'react-icons/fa';
 
@@ -201,24 +201,51 @@ export default function AdminDashboard() {
 
               {formType === 'student' && (
                 <>
-                  <div className="form-group">
-                    <label><FiBook /> Registration No</label>
-                    <input 
-                      placeholder="Registration Number" 
-                      value={formData.regNo || ''} 
-                      onChange={e => setFormData({ ...formData, regNo: e.target.value })} 
-                      required 
-                    />
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label><FiBook /> Registration No</label>
+                      <input 
+                        placeholder="Registration Number" 
+                        value={formData.regNo || ''} 
+                        onChange={e => setFormData({ ...formData, regNo: e.target.value })} 
+                        required 
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label><FiPhone /> Mobile</label>
+                      <input 
+                        type="tel" 
+                        placeholder="Mobile Number" 
+                        value={formData.mobNo || ''} 
+                        onChange={e => setFormData({ ...formData, mobNo: e.target.value })} 
+                      />
+                    </div>
                   </div>
 
-                  <div className="form-group">
-                    <label><FiPhone /> Mobile</label>
-                    <input 
-                      type="tel" 
-                      placeholder="Mobile Number" 
-                      value={formData.mobNo || ''} 
-                      onChange={e => setFormData({ ...formData, mobNo: e.target.value })} 
-                    />
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label><FiUsers /> Batch</label>
+                      <input 
+                        placeholder="Batch" 
+                        value={formData.batch || ''} 
+                        onChange={e => setFormData({ ...formData, batch: e.target.value })} 
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label><FiCalendar /> Year</label>
+                      <select
+                        value={formData.year || ''}
+                        onChange={e => setFormData({ ...formData, year: e.target.value })}
+                      >
+                        <option value="">Select Year</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                      </select>
+                    </div>
                   </div>
 
                   <div className="form-group">
@@ -320,51 +347,55 @@ export default function AdminDashboard() {
                 {loading ? (
                   <div className="loading-indicator">Loading...</div>
                 ) : filteredStudents.length > 0 ? (
-                  <table className="data-table">
-                    <thead>
-  <tr>
-    <th>Name</th>
-    <th>Reg No</th>
-    <th>Mobile No</th>
-    <th>Email</th>
-    <th>Duration</th>
-    <th>Password</th>
-    <th>Course</th>
-    <th>Pending Fee</th>
-    <th>Actions</th>
-  </tr>
-</thead>
-<tbody>
-  {filteredStudents.map(student => (
-    <tr key={student._id}>
-      <td>{student.name}</td>
-      <td>{student.regNo}</td>
-      <td>{student.mobNo || '-'}</td>
-      <td>{student.email || '-'}</td>
-      <td>{student.duration || '-'}</td>
-      <td>{student.password}</td>
-      <td>{student.course || '-'}</td>
-      <td className={student.pendingFee > 0 ? 'pending' : 'paid'}>
-        ₹{student.pendingFee || 0}
-      </td>
-                          <td className="actions">
-                            <button 
-                              onClick={() => handleEdit(student, 'student')} 
-                              className="edit-button"
-                            >
-                              <FiEdit2 />
-                            </button>
-                            <button 
-                              onClick={() => handleDelete(student._id, 'student')} 
-                              className="delete-button"
-                            >
-                              <FiTrash2 />
-                            </button>
-                          </td>
+                  <div className="table-responsive">
+                    <table className="data-table">
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Reg No</th>
+                          <th>Batch</th>
+                          <th>Year</th>
+                          <th>Mobile</th>
+                          <th>Email</th>
+                          <th>Course</th>
+                          <th>Duration</th>
+                          <th>Pending Fee</th>
+                          <th>Actions</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        {filteredStudents.map(student => (
+                          <tr key={student._id}>
+                            <td>{student.name}</td>
+                            <td>{student.regNo}</td>
+                            <td>{student.batch || '-'}</td>
+                            <td>{student.year || '-'}</td>
+                            <td>{student.mobNo || '-'}</td>
+                            <td>{student.email || '-'}</td>
+                            <td>{student.course || '-'}</td>
+                            <td>{student.duration || '-'}</td>
+                            <td className={student.pendingFee > 0 ? 'pending' : 'paid'}>
+                              ₹{student.pendingFee || 0}
+                            </td>
+                            <td className="actions">
+                              <button 
+                                onClick={() => handleEdit(student, 'student')} 
+                                className="edit-button"
+                              >
+                                <FiEdit2 />
+                              </button>
+                              <button 
+                                onClick={() => handleDelete(student._id, 'student')} 
+                                className="delete-button"
+                              >
+                                <FiTrash2 />
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 ) : (
                   <div className="no-data">No student records found</div>
                 )}
@@ -375,45 +406,45 @@ export default function AdminDashboard() {
                 {loading ? (
                   <div className="loading-indicator">Loading...</div>
                 ) : filteredFaculties.length > 0 ? (
-                  <table className="data-table">
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Password</th>
-                        <th>Department</th>
-                        <th>Role</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {filteredFaculties.map(faculty => (
-                        <tr key={faculty._id}>
-                          <td>{faculty.name}</td>
-                          <td>{faculty.email}</td>
-                          <td>{faculty.password}</td>
-                          <td>{faculty.department || '-'}</td>
-                          <td className={faculty.isAdmin ? 'admin' : 'faculty'}>
-                            {faculty.isAdmin ? 'Admin' : 'Faculty'}
-                          </td>
-                          <td className="actions">
-                            <button 
-                              onClick={() => handleEdit(faculty, 'faculty')} 
-                              className="edit-button"
-                            >
-                              <FiEdit2 />
-                            </button>
-                            <button 
-                              onClick={() => handleDelete(faculty._id, 'faculty')} 
-                              className="delete-button"
-                            >
-                              <FiTrash2 />
-                            </button>
-                          </td>
+                  <div className="table-responsive">
+                    <table className="data-table">
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Department</th>
+                          <th>Role</th>
+                          <th>Actions</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        {filteredFaculties.map(faculty => (
+                          <tr key={faculty._id}>
+                            <td>{faculty.name}</td>
+                            <td>{faculty.email}</td>
+                            <td>{faculty.department || '-'}</td>
+                            <td className={faculty.isAdmin ? 'admin' : 'faculty'}>
+                              {faculty.isAdmin ? 'Admin' : 'Faculty'}
+                            </td>
+                            <td className="actions">
+                              <button 
+                                onClick={() => handleEdit(faculty, 'faculty')} 
+                                className="edit-button"
+                              >
+                                <FiEdit2 />
+                              </button>
+                              <button 
+                                onClick={() => handleDelete(faculty._id, 'faculty')} 
+                                className="delete-button"
+                              >
+                                <FiTrash2 />
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 ) : (
                   <div className="no-data">No faculty records found</div>
                 )}
@@ -442,17 +473,18 @@ export default function AdminDashboard() {
 
         .dashboard-header h1 {
           color: #2c3e50;
-          font-size: 2.2rem;
+          font-size: clamp(1.8rem, 4vw, 2.2rem);
           margin-bottom: 5px;
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 10px;
+          flex-wrap: wrap;
         }
 
         .dashboard-header h2 {
           color: #e74c3c;
-          font-size: 1.8rem;
+          font-size: clamp(1.4rem, 3vw, 1.8rem);
           font-weight: 600;
           display: flex;
           align-items: center;
@@ -460,12 +492,16 @@ export default function AdminDashboard() {
           gap: 10px;
         }
 
+        .dashboard-content {
+          margin-top: 20px;
+        }
+
         .action-bar {
           display: flex;
           flex-wrap: wrap;
           justify-content: space-between;
           align-items: center;
-          gap: 20px;
+          gap: 15px;
           margin-bottom: 30px;
           padding: 15px;
           background: #f8f9fa;
@@ -484,6 +520,13 @@ export default function AdminDashboard() {
           border: 1px solid #ddd;
           border-radius: 25px;
           font-size: 14px;
+          transition: all 0.3s;
+        }
+
+        .search-container input:focus {
+          outline: none;
+          border-color: #3498db;
+          box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
         }
 
         .search-icon {
@@ -497,6 +540,7 @@ export default function AdminDashboard() {
         .button-group {
           display: flex;
           gap: 10px;
+          flex-wrap: wrap;
         }
 
         .tab-button {
@@ -510,6 +554,7 @@ export default function AdminDashboard() {
           align-items: center;
           gap: 5px;
           transition: all 0.3s;
+          font-size: 14px;
         }
 
         .tab-button.active {
@@ -520,6 +565,7 @@ export default function AdminDashboard() {
         .add-buttons {
           display: flex;
           gap: 10px;
+          flex-wrap: wrap;
         }
 
         .add-button {
@@ -533,6 +579,7 @@ export default function AdminDashboard() {
           align-items: center;
           gap: 5px;
           transition: all 0.3s;
+          font-size: 14px;
         }
 
         .add-button:hover {
@@ -567,6 +614,7 @@ export default function AdminDashboard() {
           display: flex;
           align-items: center;
           gap: 8px;
+          font-size: 1.1rem;
         }
 
         .close-button {
@@ -576,6 +624,8 @@ export default function AdminDashboard() {
           font-size: 1.2rem;
           cursor: pointer;
           padding: 5px;
+          display: flex;
+          align-items: center;
         }
 
         .admin-form {
@@ -593,6 +643,7 @@ export default function AdminDashboard() {
           display: flex;
           align-items: center;
           gap: 5px;
+          font-size: 14px;
         }
 
         .form-group input,
@@ -602,6 +653,14 @@ export default function AdminDashboard() {
           border: 1px solid #ddd;
           border-radius: 4px;
           font-size: 14px;
+          transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+          outline: none;
+          border-color: #3498db;
+          box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
         }
 
         .form-row {
@@ -611,6 +670,7 @@ export default function AdminDashboard() {
 
         .form-row .form-group {
           flex: 1;
+          min-width: 0;
         }
 
         .form-checkbox {
@@ -618,6 +678,10 @@ export default function AdminDashboard() {
           align-items: center;
           gap: 8px;
           margin: 15px 0;
+        }
+
+        .form-checkbox input {
+          width: auto;
         }
 
         .submit-button {
@@ -635,6 +699,7 @@ export default function AdminDashboard() {
           justify-content: center;
           gap: 8px;
           transition: background 0.3s;
+          margin-top: 10px;
         }
 
         .submit-button:hover {
@@ -678,11 +743,18 @@ export default function AdminDashboard() {
           display: flex;
           align-items: center;
           gap: 8px;
+          font-size: 1.2rem;
+        }
+
+        .table-responsive {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
         }
 
         .data-table {
           width: 100%;
           border-collapse: collapse;
+          min-width: 600px;
         }
 
         .data-table th {
@@ -690,11 +762,14 @@ export default function AdminDashboard() {
           color: white;
           padding: 12px;
           text-align: left;
+          font-weight: 500;
+          font-size: 14px;
         }
 
         .data-table td {
           padding: 12px;
           border-bottom: 1px solid #ecf0f1;
+          font-size: 14px;
         }
 
         .data-table tr:hover {
@@ -735,6 +810,11 @@ export default function AdminDashboard() {
           cursor: pointer;
           display: flex;
           align-items: center;
+          transition: background 0.3s;
+        }
+
+        .edit-button:hover {
+          background: #2980b9;
         }
 
         .delete-button {
@@ -746,6 +826,11 @@ export default function AdminDashboard() {
           cursor: pointer;
           display: flex;
           align-items: center;
+          transition: background 0.3s;
+        }
+
+        .delete-button:hover {
+          background: #c0392b;
         }
 
         .loading-indicator,
@@ -753,22 +838,34 @@ export default function AdminDashboard() {
           text-align: center;
           padding: 30px;
           color: #7f8c8d;
+          font-size: 16px;
         }
 
         @media (max-width: 768px) {
+          .admin-dashboard {
+            padding: 15px;
+          }
+
           .action-bar {
             flex-direction: column;
             align-items: stretch;
+            gap: 15px;
+          }
+          
+          .search-container {
+            width: 100%;
           }
           
           .button-group,
           .add-buttons {
             width: 100%;
+            justify-content: center;
           }
           
           .tab-button,
           .add-button {
-            flex: 1;
+            flex: 1 1 auto;
+            min-width: 120px;
             justify-content: center;
           }
           
@@ -776,10 +873,54 @@ export default function AdminDashboard() {
             flex-direction: column;
             gap: 15px;
           }
-          
+
+          .form-group input,
+          .form-group select {
+            width: 100%;
+          }
+
           .data-table {
-            display: block;
-            overflow-x: auto;
+            font-size: 13px;
+          }
+
+          .data-table th,
+          .data-table td {
+            padding: 8px 10px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .dashboard-header h1,
+          .dashboard-header h2 {
+            flex-direction: column;
+            gap: 5px;
+          }
+
+          .tab-button,
+          .add-button {
+            font-size: 13px;
+            padding: 6px 10px;
+          }
+
+          .form-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+          }
+
+          .close-button {
+            align-self: flex-end;
+          }
+
+          .actions {
+            flex-direction: column;
+            gap: 5px;
+          }
+
+          .edit-button,
+          .delete-button {
+            width: 100%;
+            justify-content: center;
           }
         }
       `}</style>
