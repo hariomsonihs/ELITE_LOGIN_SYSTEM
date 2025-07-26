@@ -9,7 +9,8 @@ const studentSchema = new mongoose.Schema({
   course: String,
   totalFee: String,
   pendingFee: String,
-  duration: String
+  duration: String,
+  batch: String
 });
 
 module.exports = mongoose.model('Student', studentSchema);
